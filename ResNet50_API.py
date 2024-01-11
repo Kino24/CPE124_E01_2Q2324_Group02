@@ -1,4 +1,4 @@
-# NOTE PLEASE USE http://localhost:8002 to access the API
+# NOTE PLEASE USE http://localhost:8002/docs# to access the API
 
 from PIL import Image
 import numpy as np #  A library for numerical computing in Python.
@@ -14,7 +14,7 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-model=tf.keras.models.load_model('./classifier_resnet_model.h5')
+model=tf.keras.models.load_model('./classifier_resnet_model.keras')
 class_names = ['BA-cellulitis','Ba-impetigo','FU-athlete-foot','FU-nail-fungus',
                'FU-ringworm','PA-cutaneous-larva-migrans','VI-chickenpox',
                'VI-shingles']
