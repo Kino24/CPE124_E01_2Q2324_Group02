@@ -1,16 +1,16 @@
 import requests
-from fastapi import FastAPI, File, UploadFile, HTTPException, Request
-from pathlib import Path
-import os
-#API URL
-reqURL='http://localhost:8002/getDirectory'
-directory=os.path.dirname(os.path.realpath(__file__))
-query='download (4).jpg'
-files=(Path(directory))
-fileOpen=files/query
-response = requests.get(f"{reqURL}/{fileOpen}")
-data=response.json()
-classification=data.get('class')
-prediction=data.get('confidence')
 
-print(classification, prediction)
+reqURL = 'http://127.0.0.1:8000/predict/'
+
+image_path = 'C:/Users/user/Downloads/README.md'
+
+def getPrediction(image_path):
+    try:
+        with open(image_path, 'rb') as image_file:
+            
+            files = {'file': (image_path, image_file, 'image/jpeg')}
+            response = requests.post(reqURL, files=files)
+            data = response.json()
+            return(data)
+    except Exception as e:
+        print ("File cannot be read. Please upload a proper image file!")
