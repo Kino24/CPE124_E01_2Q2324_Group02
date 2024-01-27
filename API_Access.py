@@ -2,8 +2,6 @@ import requests
 
 reqURL = 'http://127.0.0.1:8000/predict/'
 
-image_path = 'C:/Users/user/Downloads/README.md'
-
 def getPrediction(image_path):
     try:
         with open(image_path, 'rb') as image_file:
