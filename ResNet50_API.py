@@ -1,22 +1,17 @@
-# NOTE PLEASE USE http://localhost:8002/docs# to access the API
-
 from PIL import Image
-import numpy as np #  A library for numerical computing in Python.
+import numpy as np
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-import uvicorn # ASGI server to run the FastAPI application.
 import uvicorn
-from io import BytesIO # A class for working with binary data in memory.
-from PIL import Image # A library for image processing.
-from typing import Tuple # A library for type hints.
-import tensorflow as tf # A library for machine learning.
-from fastapi.responses import HTMLResponse
+import uvicorn
+from io import BytesIO
+from PIL import Image
+from typing import Tuple
+import tensorflow as tf
 
 app = FastAPI()
 
 model=tf.keras.models.load_model('./classifier_resnet_model.keras')
-class_names = ['BA-cellulitis','Ba-impetigo','FU-athlete-foot','FU-nail-fungus',
-               'FU-ringworm','PA-cutaneous-larva-migrans','VI-chickenpox',
+class_names = ['Ba-impetigo','VI-chickenpox',
                'VI-shingles']
 
 def read_image_file(data) -> Tuple[np.array, Tuple[int,int]]:
@@ -39,5 +34,5 @@ async def predict(file:UploadFile = File(...)):
         raise HTTPException(status_code=400,detail=str(e))
     
 if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=8002)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
     
